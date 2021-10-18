@@ -130,6 +130,7 @@ class Agenda{
         return $tabla;
     }
 }
+// Cogemos los valores del array antes de ejecutar el input
 $nombres=[];
 $direcciones=[];
 $Age=new Agenda();
@@ -145,7 +146,7 @@ if((isset($_POST["nombres"])) && (isset($_POST["direcciones"]))) {
     }
 }
 
-
+// Actualizamos los arrays
 if((isset($_POST["nombre"])) && (isset($_POST["direccion"]))) {
     $entradas;
     $nombre= $_POST["nombre"];
@@ -160,7 +161,7 @@ if((isset($_POST["nombre"])) && (isset($_POST["direccion"]))) {
 echo $Age->mostrar_persona();
 ?>
 
-
+<!-- creaccion de los input hidden -->
 <input type="hidden" name="nombres" value="<?php if(!empty($nombres)) { echo implode(",", $nombres); } ?>">
 <input type="hidden" name="direcciones" value="<?php if(!empty($nombres)) { echo implode(",",$direcciones); } ?>">
 </form>
