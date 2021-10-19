@@ -27,6 +27,9 @@
 
 <?php
 // clase agenda
+
+use Agenda as GlobalAgenda;
+
 class Agenda{
     //creando el array asociativo
     private $persona=[];
@@ -97,9 +100,13 @@ class Agenda{
         }
         return false;
     }
-    // el funcionamiento de este metodo es recoger el array asociativo
-    public function getPersonas(){
-        return $this->persona;
+
+    public function get_nombres(){
+        return array_keys($this->persona);
+    }
+    
+    public function get_direcciones(){
+        return array_values($this->persona);
     }
     // este metodo añade los atributos a la agenda con sus diferentes casos
     public function añadir_persona($nombre,$direccion){
@@ -149,14 +156,11 @@ if((isset($_POST["nombres"])) && (isset($_POST["direcciones"]))) {
 // Actualizamos los arrays
 if((isset($_POST["nombre"])) && (isset($_POST["direccion"]))) {
     $entradas;
-    $nombre= $_POST["nombre"];
-    $direccion= $_POST["direccion"];
+    $nombre= strip_tags($_POST["nombre"]);
+    $direccion= strip_tags($_POST["direccion"]);
     $Age->añadir_persona($nombre,$direccion);
-    $entradas= $Age->getPersonas();
-    foreach($entradas as $nombre=>$direccion){
-        array_push($nombres,$nombre);
-        array_push($direcciones,$direccion);
-    }
+    $nombres = $persona -> get_nombres;
+    $direcciones = $persona -> get_direcciones;
 }
 echo $Age->mostrar_persona();
 ?>
