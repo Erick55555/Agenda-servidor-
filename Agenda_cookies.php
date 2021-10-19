@@ -141,17 +141,14 @@ class Agenda{
 $nombres=[];
 $direcciones=[];
 $Age=new Agenda();
-if((isset($_POST["nombres"])) && (isset($_POST["direcciones"]))) {
-    $nombres= explode(",", $_POST["nombres"]);
-    $direcciones= explode(",",$_POST["direcciones"]);
+if((isset($_COOKIE["nombres"])) && (isset($_COOKIE["direcciones"]))) {
+    $nombres= explode(",", $_COOKIE["nombres"]);
+    $direcciones= explode(",",$_COOKIE["direcciones"]);
     for($i=0;$i<count($nombres);$i++){
-        if($i!=0){
-          $Age->añadir_persona($nombres[$i],$direcciones[$i]);
-        echo $nombres[$i];
-        echo $direcciones[$i];  
+        $Age->añadir_persona($nombres[$i],$direcciones[$i]);  
         }
     }
-}
+
 
 // Actualizamos los arrays
 if((isset($_POST["nombre"])) && (isset($_POST["direccion"]))) {
@@ -159,15 +156,17 @@ if((isset($_POST["nombre"])) && (isset($_POST["direccion"]))) {
     $nombre= strip_tags($_POST["nombre"]);
     $direccion= strip_tags($_POST["direccion"]);
     $Age->añadir_persona($nombre,$direccion);
-    $nombres = $persona -> get_nombres;
-    $direcciones = $persona -> get_direcciones;
+    $nombres = $Age->get_nombres();
+    $direcciones = $Age->get_direcciones();
+    setcookie("nombres", implode(",", $nombres));
+    setcookie("direcciones", implode(",", $direcciones));
+
 }
 echo $Age->mostrar_persona();
 ?>
 
 <!-- creaccion de los input hidden -->
-<input type="hidden" name="nombres" value="<?php if(!empty($nombres)) { echo implode(",", $nombres); } ?>">
-<input type="hidden" name="direcciones" value="<?php if(!empty($nombres)) { echo implode(",",$direcciones); } ?>">
+
 </form>
 </body>
 </html>

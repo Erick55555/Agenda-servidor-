@@ -144,14 +144,12 @@ $Age=new Agenda();
 if((isset($_POST["nombres"])) && (isset($_POST["direcciones"]))) {
     $nombres= explode(",", $_POST["nombres"]);
     $direcciones= explode(",",$_POST["direcciones"]);
+    
     for($i=0;$i<count($nombres);$i++){
-        if($i!=0){
-          $Age->añadir_persona($nombres[$i],$direcciones[$i]);
-        echo $nombres[$i];
-        echo $direcciones[$i];  
+        $Age->añadir_persona($nombres[$i],$direcciones[$i]);
         }
     }
-}
+
 
 // Actualizamos los arrays
 if((isset($_POST["nombre"])) && (isset($_POST["direccion"]))) {
@@ -159,8 +157,8 @@ if((isset($_POST["nombre"])) && (isset($_POST["direccion"]))) {
     $nombre= strip_tags($_POST["nombre"]);
     $direccion= strip_tags($_POST["direccion"]);
     $Age->añadir_persona($nombre,$direccion);
-    $nombres = $persona -> get_nombres;
-    $direcciones = $persona -> get_direcciones;
+    $nombres = $Age -> get_nombres();
+    $direcciones = $Age -> get_direcciones();
 }
 echo $Age->mostrar_persona();
 ?>
