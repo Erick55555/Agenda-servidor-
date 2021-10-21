@@ -7,7 +7,14 @@
     <title>Agenda</title>
 </head>
 <body>
+<?php
+$usuario;
+if(isset($_POST["usuario"])){
+    $usuario= ($_POST["usuario"]);
+}
+?>
 <form method="post">
+    <h1>Bienvenido <?php { echo $_POST["usuario"] ; } ?></h1>
     <table>
         <tr>
             <td colspan="2"><h1>Eliga que parametros quiere meter:</h1></td>
@@ -156,6 +163,7 @@ if((isset($_POST["nombre"])) && (isset($_POST["direccion"]))) {
     $entradas;
     $nombre= strip_tags($_POST["nombre"]);
     $direccion= strip_tags($_POST["direccion"]);
+    $usuario= ($_POST["usuario"]);
     $Age->añadir_persona($nombre,$direccion);
     $nombres = $Age -> get_nombres();
     $direcciones = $Age -> get_direcciones();
@@ -166,6 +174,7 @@ echo $Age->mostrar_persona();
 <!-- creaccion de los input hidden -->
 <input type="hidden" name="nombres" value="<?php if(!empty($nombres)) { echo implode(",", $nombres); } ?>">
 <input type="hidden" name="direcciones" value="<?php if(!empty($nombres)) { echo implode(",",$direcciones); } ?>">
+<input type="hidden" name="usuario" value="<?php if(!empty($usuario)) { echo $usuario; } ?>">
 </form>
 </body>
 </html>
