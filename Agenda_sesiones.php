@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -141,9 +144,9 @@ class Agenda{
 $nombres=[];
 $direcciones=[];
 $Age=new Agenda();
-if((isset($_POST["nombres"])) && (isset($_POST["direcciones"]))) {
-    $nombres= explode(",", $_POST["nombres"]);
-    $direcciones= explode(",",$_POST["direcciones"]);
+if((isset($_SESSION["nombres"])) && (isset($_SESSION["direcciones"]))) {
+    $nombres= explode(",", $_SESSION["nombres"]);
+    $direcciones= explode(",",$_SESSION["direcciones"]);
     
     for($i=0;$i<count($nombres);$i++){
         $Age->añadir_persona($nombres[$i],$direcciones[$i]);
@@ -159,13 +162,12 @@ if((isset($_POST["nombre"])) && (isset($_POST["direccion"]))) {
     $Age->añadir_persona($nombre,$direccion);
     $nombres = $Age -> get_nombres();
     $direcciones = $Age -> get_direcciones();
+    $_SESSION["nombres"]= implode(",", $nombres);
+    $_SESSION["direcciones"]= implode(",", $direcciones);
 }
 echo $Age->mostrar_persona();
 ?>
 
-<!-- creaccion de los input hidden -->
-<input type="hidden" name="nombres" value="<?php if(!empty($nombres)) { echo implode(",", $nombres); } ?>">
-<input type="hidden" name="direcciones" value="<?php if(!empty($nombres)) { echo implode(",",$direcciones); } ?>">
 </form>
 </body>
 </html>

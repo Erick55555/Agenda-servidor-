@@ -14,11 +14,11 @@
         </tr>
         <tr>
             <td><label>Nombre: </label></td>
-            <td><input type="text" name="nombre"></td>
+            <td><input type="text" name="nombre" value="<?php  if(isset($_POST["nombre"])) { echo $_POST["nombre"] ; } ?>"></td>
         </tr>
         <tr>
             <td><label>Direccion de correo electronico: </label></td>
-            <td><input type="text" name="direccion"></td>
+            <td><input type="text" name="direccion" value="<?php  if(isset($_POST["direccion"])) { echo $_POST["direccion"] ; } ?>"></td>
         </tr>
         <tr>
             <td colspan="2"><input type="submit" value="Enviar"></td>
@@ -164,8 +164,6 @@ if((isset($_POST["nombre"])) && (isset($_POST["direccion"]))) {
 }
 echo $Age->mostrar_persona();
 ?>
-
-<!-- creaccion de los input hidden -->
 
 </form>
 </body>
